@@ -1,0 +1,35 @@
+{
+  "name": "app",
+  "version": "0.3.0",
+  "description": "A Node.js shopping app using Express 4",
+  "engines": {
+    "node": "8.9.1"
+  },
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "node test.js"
+  },
+  "dependencies": {
+    "async-waterfall": "^0.1.5",
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.2",
+    "connect": "^3.6.5",
+    "cookie-parser": "^1.4.3",
+    "csurf": "^1.9.0",
+    "curl-cmd": "0.0.1",
+    "debug": "~2.6.9",
+    "dialog": "^0.3.1",
+    "ejs": "^2.6.1",
+    "expres": "0.0.5",
+    "express": "^4.16.3",
+    "express-flash-notification": "^0.5.0",
+    "express-session": "^1.15.6",
+    "morgan": "^1.9.0",
+    "node-rest-client": "^3.1.0",
+    "npm": "^6.0.0",
+    "request": "^2.85.0",
+    "serve-favicon": "^2.5.0",
+    "xmlhttprequest": "^1.8.0"
+  }
+}

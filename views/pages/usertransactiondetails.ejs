@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!-- views/pages/userid.ejs -->
+<head>
+<% include ../common/head %>
+</head>
+<% include ../common/body %>
+<main>
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-8 col-md-offset-2">
+    <h2>Your Transaction Details</h2>
+
+    <form action="/gettransactions" method="GET">
+
+	<input type="hidden" name="user_id" value=<%= userid%>>
+
+	<table class ="table table-striped">
+	    <tr>
+		<th>Transaction Id: </th><td colspan="3"><%= transactionid %></td>
+	    </tr>
+	    <tr>
+		<th>Transaction Date:</th><td colspan="3"><%= transactiondate %></td>
+	    </tr>
+	    <tr>
+		<th> Transaction Total: </th><td colspan="3"><%= transactiontotal%></td>
+	    </tr>
+	    <tr><th scope="column">Books</th><th scope="column">Quantity</th><th scope="column">Rate</th>
+		<th scope="column">Total Items Price</th> 
+	    </tr>
+
+		    <% for(var i=0; i < arr.length; i++) { %>
+		      
+	    <tr>
+		    <td>&nbsp;&nbsp; <%=  arr[i].product %>&nbsp;&nbsp;</td>
+		    <td>&nbsp;&nbsp; <%=  arr[i].quantity %> &nbsp;&nbsp;</td>
+		    <td>&nbsp;&nbsp; <%=  arr[i].rate %>&nbsp;&nbsp;</td>
+		    <td>&nbsp;&nbsp; <%=  arr[i].total %>&nbsp;&nbsp; </td>
+
+		    
+		       </tr>
+		   
+		       <% } %>
+		    
+	    </table>
+
+	</table>
+	<br>
+	<input type="submit" class="btn btn-primary" value="Back to Transactions History">  
+
+    </form>
+
+</div>
+</div>
+</div>
+</main>

@@ -1,0 +1,24 @@
+<head>
+  <% include ../common/head.ejs %>
+</head>
+<% include ../common/body.ejs %>
+<div class="row">
+	<div class="col-md-4 col-md-offset-4">
+		<h1>Sign In</h1>
+		<!-- {{#if hasErrors}}
+			<div class="alert alert-danger">
+				{{# each messages}}
+					<p>{{ this }}</p>
+				{{/each}}
+			</div>
+		{{/if}} -->
+		<form action="/signin" method="post">
+			<div class="form-group">
+				<label for="email">User ID</label>
+				<input type="text" class="form-control" name="inputUsername" id="inputUsername" placeholder="User Id">
+			</div>
+			<button type="submit" class="btn btn-primary">Sign In</button>
+		</form>
+		<p>Don't have an account? <a href="/signup">Sign Up Instead!</a></p>
+	</div>
+</div>

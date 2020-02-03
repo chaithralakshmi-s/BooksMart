@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<% include ../common/head.ejs %>
+</head>
+<% include ../common/body.ejs %>
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-8 col-md-offset-2">
+    <h2>Cart Items</h2>
+    <h6>User Id: <% if(user){%><%= user %><%}%></h6>
+</div>
+</div>
+<div class="row">
+<div class="col-md-8 col-md-offset-2">
+<%if(items.length > 0){
+	for(let i=0; i< items.length; i++){%>
+<div class="card" style="margin-top: 10px; border: 1px solid black">
+    <div class="card-block">
+	<h4 class="card-title"><%= items[i].name %></h4>
+	<p class="card-text">Price: <%= items[i].rate %></p>
+	<p class="card-text">Quantity: <%= items[i].count %></p>
+	<p class="card-text">Total Item Price: <%= items[i].amount %></p>
+    </div>
+</div>
+<%}%>
+<div class="h4">Total: $<%= total %></div>
+<%}%>
+<div class="card" style="margin-top: 10px;">
+    <div class="card-block" >
+	<% if(items.length <= 0) { %>
+	<h4 class="card-title">Cart is Empty...Add Some items to view</h4>
+	<% } %>
+	<% if(items.length > 0) { %>
+	<a class="btn btn-primary" href="/post-cart">Checkout</a>
+	<a class="btn btn-secondary" href="/">Go to Products</a>
+	<% } %>
+	<% if(items.length <= 0) { %>
+	<a class="btn btn-primary" href="/">Go to Products</a>
+	<% } %>
+    </div>
+</div>
+</div>
+</div>
+</div>

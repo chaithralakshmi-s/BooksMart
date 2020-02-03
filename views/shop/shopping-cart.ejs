@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<% include ../common/head.ejs %>
+</head>
+<% include ../common/body.ejs %>
+<h1 style="text-align:center;">Shopping Cart</h1>
+	<script>
+		function shareURL(){
+			console.log("======IN shared URL func=========");
+			var success_element = document.getElementById("success");
+			var sharedURL = "<%= userId %>"+ "/" + "<%= userSession %>" ;
+			success_element.style.display = "block";
+			success_element.innerHTML = "<span>Shop by sharing the cart link!! &nbsp;&nbsp; </span><a href=" +  sharedURL + "<span><b>" + sharedURL +" </b></span></a>";
+		}
+	</script>
+<%if (cartItems.length > 0) { %>
+	<div class="row">
+		<% for(var i=0; i < cartItems.length; i++) { 
+		if(cartItems[i].quantity > 0) {
+		console.log(cartItems[i].userId);
+		var booktitle = cartItems[i].title.toString();
+		console.log(booktitle);
+        %>
+		<div class="col-sm-10 col-md-6 col-md-offset-3 col-sm-offset-2">
+			<form action="/updateQty" method="post" style="display: inline-block; width:100%" > 
+			<ul class="list-group">
+
+					<li class="list-group-item">
+						<img src=<%= cartItems[i].imageUrl %> alt="..." class="img-responsive bookImage" style="display:inline-block; margin-bottom:10px;"></img>
+						<input type="hidden" class="form-control" name="image_URL_Hidden" value=<%= cartItems[i].imageUrl %>></input>
+						<div style="width: 70%;display: inline-block;margin-left: 30px;">
+							<h3 class= "bookTitle" title="<%= cartItems[i].title %>"> <%= cartItems[i].title %></h3>
+							<input type="hidden" class="form-control" name="book_Title_Hidden" value="<%= booktitle %>"/>
+							<h4 class= "bookAuthor" title="<%= cartItems[i].title %>">By <%= cartItems[i].author %></h4>
+							<input type="hidden" class="form-control" name="book_Author_Hidden" value="<%= cartItems[i].author %>"/>
+						</div>
+						<input type="hidden" class="form-control" name="cart_Id" value=<%= cartItems[i]._id.$oid %>>
+						<input type="hidden" class="form-control" name="book_Id" value=<%= cartItems[i].productId %>>
+						<div style="width: 89%;display: inline-block;font-size: 25px;">
+							<div class="label label-success" title="$<%= cartItems[i].price %>" style="display: inline-block;">
+								<Strong>Price: </Strong>$<%= cartItems[i].price %>
+
+							</div>
+						</div>
+                      				<input type="hidden" class="form-control" name="book_Price_Hidden" value=<%= cartItems[i].price %>>
+						<div style="display: inline-block; width: 10%;text-align: right;">
+							<span class="badge" style="font-size: 20px;"><%= cartItems[i].quantity %></span>
+						</div>
+						<div>
+					            <div class="input-group" style="margin-top: 10px;"> 
+		                			<input type="text" class="form-control" name="quantity" placeholder="Update quantity of book here" />
+		                			<!--<input type="hidden" name="productData" value=<%= cartItems[i] %>/>-->
+		                			<span class="input-group-btn">
+				        			<button class="btn btn-default" type="submit" style="display: inline-block">
+									<span class="glyphicon glyphicon-ok"></span>
+								</button>
+		                			</span>
+			                    	    </div>
+                        			</div>	
+					</li>
+			</ul>
+        		</form>
+		</div>
+    <% }} %>
+	</div>
+<%if (cartStatistics[0].totalAmount == 0) { %>
+	<div class="row">
+		<div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+			<strong><h2>No Items in Cart</h2></strong>
+		</div>
+	</div>
+<% } %>
+<%if (cartStatistics[0].totalAmount > 0) { %>
+	<div class="row">
+		<div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3" style="font-size: 25px;">
+			<strong>Total: $<%= cartStatistics[0].totalAmount %></strong>
+		</div>
+	</div>
+	<hr>
+	<div class="container" style="width: 5%;display: inline-block;position: relative;vertical-align: top;margin-left: 35%;">
+		<div class="row">
+			<div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+				<a href=/payment/<%= cartStatistics[0].totalAmount %> type="button" class="btn btn-success" style="font-size: 20px;font-weight: bold;">Checkout</a>
+			</div>
+		</div>
+	</div>
+<% } %>
+	<div class="container" style="width: 50% !important; display: inline-block;">
+		<div class="row">
+			<div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+				<input type="button" id="sharedURL" class="btn btn-success" style="font-size: 20px;font-weight: bold;" value="Share Cart" onclick="shareURL()">
+			</div>
+		</div>
+	</div>
+	<div id="success" class="alert alert-success container" style="display:none; margin-top: 20px;text-align: center;width: 60%;"></div>
+<% } else { %>  
+	<div class="container" style="width: 20% !important; display: inline-block;">
+		<div class="row">
+			<div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+				<input type="button" id="sharedURL" class="btn btn-success" value="Share Cart" onclick="shareURL()">
+			</div>
+		</div>
+		<div id="success" class="alert alert-success" style="display:none;">
+	    </div>
+<% } %> 

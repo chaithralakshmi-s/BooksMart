@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../common/head.ejs %>
+</head>
+
+<body>
+  <% include ../common/body.ejs %>
+ 	<div class = "container">
+     <div class="row">
+      <% for(var i=0; i < products.length; i++) {
+      	var booktitle = products[i].title_register; 
+       	var prod = "/add-to-cart/"+products[i].id_register;
+       %>
+            <div class="col-sm-4">
+                <div class="thumbnail">
+                    <img src=<%= products[i].image_URL_register %> alt="..." class="img-responsive bookImage" >
+                    <div class="caption">
+                      <h3 class= "bookTitle" title="<%= booktitle %>"> <%= booktitle %></h3>
+                      <p class="description bookTitle" title="<%= products[i].author_register %>"><Strong>Author: </Strong><%= products[i].author_register %></p>
+                      <div class="clearfix">
+                        <div class="price pull-left" title="$<%= products[i].price_register %>"><Strong>Price: </Strong>$<%= products[i].price_register %>
+                        </div>
+			<% if(login == true) { %>
+                        <a href= <%= prod %> title="Add to Shopping cart" class="btn btn-primary pull-right" role="button">Add to Shopping cart</a>
+			<% } %>
+		      </div>
+                    </div>
+                </div>
+       		</div>  
+      	<% } %>
+      </div>
+	</div>
+</body>
+</html>
